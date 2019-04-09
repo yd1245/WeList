@@ -1,0 +1,36 @@
+﻿@model WeList.Models.CreateCategoryViewModel
+@{
+    ViewBag.Title = "CategoryCreate";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+    <h2 class="title">Create Category</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        if (TempData["CreateError"] != null)
+        {
+            <div class="notification is-danger">@TempData["CreateError"]</div>
+        }
+       
+        <div class="block">
+
+            <div class="field">
+                <label class="label"> Category Name</label>
+                @Html.EditorFor(m => Model.Name, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Name,"",new { @class = "help is-danger" })
+            </div>
+            <div class="field">
+                <label class="label"> Category Slug</label>
+                @Html.EditorFor(m => Model.Slug, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Slug,"", new { @class = "help is-danger" })
+
+
+            </div>
+            <div><input type="submit" class="button" value="Create" /> <a href="@Url.Action("AdminCategory")" class="button text-center">Cancel</a></div>
+        </div>
+    }
+
+</section>

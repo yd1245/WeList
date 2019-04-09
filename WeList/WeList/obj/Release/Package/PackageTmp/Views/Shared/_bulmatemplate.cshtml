@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WeList</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>   
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <section class="section">
+        <nav class="navbar is-white" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href='@Url.Action("List", "Index")'>
+                    <img src='@Url.Content("~/Images/logo.png")' alt="WeList Logo" height="150" width="200" />
+                </a>
+            </div>
+            @Html.Partial("_LoginPartialNew")
+        </nav>
+    </section>
+    <div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+  
+    @RenderSection("scripts", required: false)
+</body>
+</html>

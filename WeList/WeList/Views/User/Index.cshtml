@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    bool flagadmin = ViewBag.Admin;
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+<h2 class="title">User Center</h2>
+<section class="section">
+    <div class="tile is-parent">
+        <div class=" tile box is-4 is-vertical is-child">
+            <h1 class="title is-primary">User Account</h1>
+            <aside class="menu">
+                <ul class="menu-list is-primary">
+                    <li><a href="@Url.Action("PostList","User")"> My Posts </a></li>
+                    <li><a href="@Url.Action("Inbox","User")"> Inbox </a></li>
+                   
+                </ul>
+            </aside>
+        </div>
+        @if (flagadmin == true)
+        {
+        <div class="tile box is-4 is-child">
+            <h1 class="title is-primary">Management</h1>
+            <aside class="menu">
+                <ul class="menu-list">
+                    <li><a href="@Url.Action("AdminArea", "Admin")" class="button is-danger">Area</a></li>
+                    <li><a href="@Url.Action("AdminCategory", "Admin")" class="button is-danger">Category</a></li>
+                    <li><a href="@Url.Action("AdminPosts", "Admin")" class="button is-danger">Posts</a></li>
+                    <li><a href="@Url.Action("AdminUsers", "Admin")" class="button is-danger">Users</a></li>
+                </ul>
+            </aside>
+        </div>
+        }
+    </div>
+</section>
+
+</section>

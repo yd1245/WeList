@@ -1,0 +1,134 @@
+﻿@model WeList.Models.HomeViewModel
+@using WeList.Models;
+
+@{
+
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+    var cateaver = Model.catecount / 3;
+
+}
+
+
+
+<section class="section">
+    <div class="tile is-ancestor">
+
+        @*Area & Locale*@
+        <div class="tile is-3 is-vertical is-parent">
+            <div class="tile is-child is-vertical box">
+                <p class="title">
+                    @(Model.locale == null ? Model.area.Name : Model.locale.Name)
+                </p>
+                <div class="dropdown is-hoverable">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu-1">
+                            <span>Change Area</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu-1" role="menu">
+                        <div class="dropdown-content">
+                            @foreach (var ar in Model.areas)
+                             {                           
+                            @Html.ActionLink(ar.Name, "List", "Index", new { area_sl = ar.Slug,loc_sl=string.Empty }, new { @class = "dropdown-item" })
+                            }
+                        </div>
+                    </div>
+                </div>
+                @foreach (var loc in Model.locales)
+                 {
+                <p>
+                    <a href="@Url.Action("List","Index",new {area_sl=Model.area.Slug,loc_sl=loc.Slug})" class="button is-small is-primary">@loc.Name</a>
+                </p>
+                 }
+            </div>
+        </div>
+
+
+
+        
+        <div class="tile is-vertical">
+
+            @*search box*@
+            @using (Html.BeginForm("List", "Index", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => Model.area.Slug)
+                @Html.HiddenFor(model => Model.area.Id)
+                if (Model.locale != null)
+                {
+                    @Html.HiddenFor(model => Model.locale.Slug)
+                    @Html.HiddenFor(model => Model.locale.Id)
+                }
+            <div class="tile is-12 is-vertical is-parent">
+                <div class="tile is-child">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input class="input" type="text" name="keyword"  value="@Model.keyword" placeholder="Find a post">
+                        </div>
+                        <div class="control">
+                            <input type="submit" value="Search" class="button is-info" />
+                        </div>
+                    </div>
+                </div>
+               @if (!ViewData.ModelState.IsValid)
+                {
+                <div class="tile is-child">
+                    @Html.ValidationMessageFor(model => model.keyword, "", new { @class = "is-size-6 help is-danger" })
+                </div>
+                }
+            </div>
+
+            }
+
+
+
+            @functions{
+                public string getColor(int i)
+                {
+                    string[] colors = new string[] { "is-primary", "is-info", "is-warning", "is-danger", "is-success", "is-link" };
+                    return colors[i % 6];
+                }
+            }
+
+            @*Category and Subcategory*@
+            <div class="tile">
+                @for (int i = 0; i < 3; i++)
+                 {
+                <div class="tile is-4 is-vertical is-parent">
+                    @for (int j = i * cateaver; j < (i == 2 ? Model.catecount : (i + 1) * cateaver); j++)
+                    {
+                    var cate = Model.categories[j] as Tuple<Category, List<Subcategory>>;
+                    var color = getColor(j);
+                    <div class="tile is-child notification @color">    
+                        <div class="has-text-weight-bold">  @*title*@                          
+                            <a class="button @color is-large is-capitalized" href="@Url.Action("List", "Posts", new { area_sl = Model.area.Slug, loc_sl = Model.locale == null ? string.Empty : Model.locale.Slug, cate_sl = cate.Item1.Slug,subc_sl=string.Empty })">
+                                @cate.Item1.Name
+                            </a>
+                        </div>
+                        <div class="columns is-multiline is-gapless">                          
+                            @foreach (var item in cate.Item2)
+                            {
+                            var temp = item.Name.Length > 11 ? item.Slug : item.Name;
+                            <div class="column is-half">
+                                <a class="button @color is-medium" href="@Url.Action("List", "Posts", new { area_sl = Model.area.Slug, loc_sl = Model.locale == null ? string.Empty : Model.locale.Slug, cate_sl = cate.Item1.Slug, subc_sl = item.Slug },null)">
+                                    @temp 
+                                </a>
+                            </div>
+                            }
+                         </div>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+
+
+        </div>
+
+
+    </div>   
+</section>

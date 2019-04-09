@@ -1,0 +1,32 @@
+﻿@model WeList.Models.Area
+@{
+    ViewBag.Title = "AreaDelete";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+    <h2 class="title">Area Delete</h2>
+    <h3 class="subtitle">@Model.Name</h3>
+    <p>@ViewData["areaid"]</p>
+
+
+    <article class="message is-danger">
+        <div class="message-header"><p>Are you sure you want to delete @Model.Name ? </p></div>
+        <div class="message-body">
+            Once you choose to delete the area, all the locales belong to this area and all the posts belong to this area
+            would be deleted at the same time.
+        </div>
+    </article>
+    <div class="block">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="button is-danger text-center" />
+                <a href="@Url.Action("AdminArea")" class="button is-danger glyphicon-align-center">Cancel</a>
+            </div>
+        }
+
+    </div>
+
+</section>

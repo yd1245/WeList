@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WeList.Models.BriefResponseViewModel>
+@{
+    ViewBag.Title = "Inbox";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+
+<section class="section">
+    <div class="title">
+        @ViewBag.Title
+    </div>
+    <div class="tile is-ancestor">
+        <div class="tile is-parent">
+            <div class="tile is-9 is-child">
+                <table class="table is-fullwidth is-striped">
+                    <thead>
+                        <tr class="is-selected">
+                            <th>@*delete*@</th>                     
+                            <th>Sender</th>
+                            <th>Post Title</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var res in Model)
+                        {
+                        <tr>
+                            <td><a class="delete" href="@Url.Action("DeleteResponse", "User", new { id = res.Id })"></a></td>
+                            <td>@res.Sender</td>
+                            <td><a href="@Url.Action("ResponseDetails", "User", new { id = res.Id })">@res.PostTitle</a></td>
+                            <td>
+                                <div class="has-text-grey-light">
+                                    @{ string time;
+                                    if (res.Timestamp.Year != DateTime.Now.Year) { time = res.Timestamp.ToString("MM / dd / yyyy"); }
+                                    if (res.Timestamp.Date == DateTime.Now.Date) { time = res.Timestamp.ToString("HH:mm"); }
+                                    else { time = res.Timestamp.ToString("MM / dd"); }
+                                    }
+                                    @time
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>
+

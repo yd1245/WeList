@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WeList.Models.Area>
+@{
+    ViewBag.Title = "AdminArea";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+
+<h2 class="title">Area Management</h2>
+
+
+<div class="block">
+    <nav class="level">
+        <div class="level-left">
+            <div class="level-item"><a href="@Url.Action("AreaCreate")" class="button">Create A New Area</a></div>
+            <div class="level-item"><a href="@Url.Action("LocaleCreate")" class="button">Create A New Locale</a></div>
+        </div>
+        @using (Html.BeginForm("AdminSearch", "Admin", FormMethod.Get))
+        {
+        <div class="level-right">
+            <div class="level-item">
+                <div class="control">
+                    <input name="keyword" class="input" type="text" placeholder="Enter key word here">
+                </div>
+
+                <div class="control">
+                    <input type="submit" value="Search" class="button is-info">
+                </div>
+            </div>
+        </div>
+        }
+
+    </nav>
+</div>
+<div>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <tr class="is-selected">
+                <th>AreaID</th>
+                <th>Area Name</th>
+                <th>Area Slug</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Name)</td>
+                    <td>@Html.DisplayFor(m => item.Slug)</td>
+                    <td><a href="@Url.Action("AreaDetail", new { areaID = item.Id })"class="button">Detail</a><a href="@Url.Action("AreaEdit", new { areaID = item.Id })" class="button">Edit</a><a href="@Url.Action("AreaDelete", new { areaID = item.Id })" class="button">delete</a></td>
+                </tr>
+
+                }
+        </tbody>
+    </table>
+</div>
+
+</section>

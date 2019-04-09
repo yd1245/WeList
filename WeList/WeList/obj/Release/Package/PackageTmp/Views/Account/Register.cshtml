@@ -1,0 +1,58 @@
+﻿@model WeList.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+
+
+<section class="section">
+    <div class="tile is-ancestor">
+        <div class="tile is-parent is-3">
+            <div class="tile is-child box">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="title">@ViewBag.Title</div>
+                    
+                    @Html.ValidationSummary("", new { @class = "help is-danger" })
+
+                    <div class="field">
+                        @Html.LabelFor(m => m.Email, new { @class = "label" })
+                        <div class="control has-icons-left">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input", placeholder = "Email" })
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        @Html.LabelFor(m => m.Password, new { @class = "label" })
+                        <div class="control has-icons-left">
+                            @Html.PasswordFor(m => m.Password, new { @class = "input", placeholder = "Password" })
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "label" })
+                        <div class="control">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", placeholder = "Confirm Password" })
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <input type="submit" class="button is-link" value="Register" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

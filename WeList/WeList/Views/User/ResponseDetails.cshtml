@@ -1,0 +1,93 @@
+﻿@model WeList.Models.ShowResponseViewModel
+@{
+    ViewBag.Title = "Response Details";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+
+
+
+
+
+<section class="section">
+    <div class="title">@ViewBag.Title</div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Post Title</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        @*<input class="input is-static" type="text" name="PostTitle" value="@Model.PostTitle" readonly>*@
+                        <a href="@Url.Action("PostDetails","User",new { id = Model.PostId })">@Model.PostTitle</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">From</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <input class="input is-static" type="text" name="FromEmail" value="@Model.FromEmail" readonly>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">To</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <input class="input is-static" type="text" name="ToEmail" value="@Model.ToEmail" readonly>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Response Time</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <p class="control">
+                        <input class="input is-static" type="text" name="ToEmail" value="@Model.ResponseTime.ToString("MM / dd / yyyy HH:mm")" readonly>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Response</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <textarea class="textarea" type="text" name="Body" readonly>@Model.Body</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <!-- Left empty for spacing -->
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <a class="button" href="@Url.Action("Inbox","User")">Go Back </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</section>
+

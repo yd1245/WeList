@@ -1,0 +1,3 @@
+Citations:
+1.Bulma:third party libraries for the site layout
+2.Posts:some of the initial posts are from the posts on the Craigslist 

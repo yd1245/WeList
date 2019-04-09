@@ -1,0 +1,45 @@
+﻿@model WeList.Models.CreateLocaleViewModel
+@using WeList.Models    
+@{
+    ViewBag.Title = "LocaleCreate";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+   
+}
+<section class="section">
+    <h2 class="title">Create Locale</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        if (TempData["CreateError"] != null)
+        {
+            <div class="notification is-danger">@TempData["CreateError"]</div>
+        }
+
+        <div class="block">
+
+            <div class="field">
+                <label class="label"> Locale Name</label>
+                @Html.EditorFor(m => Model.Name, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Name, "", new { @class = "help is-danger" })
+            </div>
+            <div class="field">
+                <label class="label"> Locale Slug</label>
+                @Html.EditorFor(m => Model.Slug, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Slug, "", new { @class = "help is-danger" })
+            </div>
+            <div class="field">
+                <label class="label"> Locale Area</label>
+                @Html.DropDownListFor(model => Model.SelectArea, new SelectList(Model.Areas, "Id", "Name"), new { htmlAttributes = new { @class = "dropdown button is-primary" } })
+                @Html.ValidationMessageFor(m => Model.SelectArea, "", new { @class = "help is-danger" })
+            </div>
+            <div><input type="submit" class="button" value="Create" /> <a href="@Url.Action("AdminArea")" class="button text-center">Cancel</a></div>
+        </div>
+    }
+
+
+</section>
+
+
+

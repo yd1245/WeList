@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WeList.Models.Subcategory>
+@{
+    ViewBag.Title = "CategoryDetail";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+<h2 class="title">Category Detail</h2>
+<h3 class="subtitle"> @ViewData["cate"].ToString() </h3>
+
+<div class="block">
+    <nav class="level">
+        <div class="level-left">
+            <div class="level-item"><a href="@Url.Action("SubcategoryCreate")" class="button">Create New SubCategory</a></div>
+            <div class="level-item"><a href="@Url.Action("AdminCategory")" class="button">Back to Category List</a></div>
+
+        </div>
+        @using (Html.BeginForm("AdminSearch", "Admin", FormMethod.Get))
+    {
+        <div class="level-right">
+            <div class="level-item">
+                <div class="control">
+                    <input name="keyword" class="input" type="text" placeholder="Enter key word here">
+                </div>
+
+                <div class="control">
+                    <input type="submit" value="Search" class="button is-info">
+                </div>
+            </div>
+        </div>
+}
+    </nav>
+</div>
+
+<div>
+    <table class="table is-striped is-fullwidth">
+        <thead>
+            <tr class="is-selected">
+                <th>SubCategory ID</th>
+                <th>SubCategor Name</th>
+                <th>SubCategor Slug</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Name)</td>
+                    <td>@Html.DisplayFor(m => item.Slug)</td>
+                    <td><a href="@Url.Action("SubcategoryEdit", new { subcateID = item.Id})" class="button">Edit</a>
+                        <a href="@Url.Action("SubcategoryDelete",new { subcateID = item.Id})" class="button">Delete</a></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+    </section>

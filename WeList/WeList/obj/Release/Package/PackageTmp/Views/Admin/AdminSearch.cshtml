@@ -1,0 +1,129 @@
+﻿@model WeList.Models.AdminViewModel
+@{
+    ViewBag.Title = "AdminSearch";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+
+}
+<section class="section">
+<h2 class="title">AdminSearch</h2>
+<h3 class="subtitle">Search Result of @ViewData["keyword"]</h3>
+
+@if (Model.Areas.Count == 0 && Model.Locales.Count == 0 && Model.Categories.Count == 0 && Model.Subcategories.Count == 0 && Model.Posts.Count == 0)
+{
+    <p class="is-danger is-4"> No Matched Searching Result.</p>
+}
+
+
+@if (Model.Areas.Count != 0)
+{
+    <div class="is-6"><strong>Area</strong></div>
+    <div>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr class="is-selected">
+                    <th class="col-md-9">ID</th>
+                    <th class="col-md-9">Name</th>
+                    <th class="col-md-9">Slug</th>
+                    <th class="col-md-9">Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Areas)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Id)</td>
+                        <td>@Html.DisplayFor(m => item.Name)</td>
+                        <td>@Html.DisplayFor(m => item.Slug)</td>
+                        <td><a href="@Url.Action("AreaDetail", new { areaID = item.Id })" class="button">Detail</a><a href="@Url.Action("AreaEdit", new { areaID = item.Id })" class="button">Edit</a><a href="@Url.Action("AreaDelete", new { areaID = item.Id })" class="button">delete</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@if (Model.Locales.Count != 0)
+{
+    <div class="is-6"><strong>Locale</strong></div>
+    <div>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr class="is-selected">
+                    <th class="col-md-9">ID</th>
+                    <th class="col-md-9">Name</th>
+                    <th class="col-md-9">Slug</th>
+                    <th class="col-md-9">Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Locales)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Id)</td>
+                        <td>@Html.DisplayFor(m => item.Name)</td>
+                        <td>@Html.DisplayFor(m => item.Slug)</td>
+                        <td><a href="@Url.Action("LocaleEdit", new { localeID = item.Id})" class="button">Edit</a><a href="@Url.Action("LocaleDelete",new { localeID = item.Id})" class="button">Delete</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@if (Model.Categories.Count != 0)
+{
+    <div class="is-6"><strong>Category</strong></div>
+    <div>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr class="is-selected">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Categories)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Id)</td>
+                        <td>@Html.DisplayFor(m => item.Name)</td>
+                        <td>@Html.DisplayFor(m => item.Slug)</td>
+                        <td><a href="@Url.Action("CategoryDetail",new { cateID = item.Id})" class="button">Detail</a><a href="@Url.Action("CategoryEdit",new { cateId = item.Id})" class="button">Edit</a><a href="@Url.Action("CategoryDelete",new { cateID=item.Id})" class="button">Delete</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@if (Model.Subcategories.Count != 0)
+{
+    <div class="is-6"><strong>Subcategory</strong></div>
+    <div>
+        <table class="table is-striped is-fullwidth">
+            <thead>
+                <tr class="is-selected">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Subcategories)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Id)</td>
+                        <td>@Html.DisplayFor(m => item.Name)</td>
+                        <td>@Html.DisplayFor(m => item.Slug)</td>
+                        <td><a href="@Url.Action("SubcategoryEdit", new { subcateID = item.Id})" class="button">Edit</a><a href="@Url.Action("SubcategoryDelete",new { subcateID = item.Id})" class="button">Delete</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+    </section>

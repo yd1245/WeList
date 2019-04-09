@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        var welcome = "Hello, " + User.Identity.GetUserName() + "!";
+
+        <div class="navbar-menu">
+            <div class="navbar-start"></div>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        @welcome
+                    </a>
+                    <div class="navbar-dropdown is-right">
+                        <a class="navbar-item" href='@Url.Action("Index", "User")'>User Center</a>
+                       @* <a class="navbar-item" href='@Url.Action("ListPosts", "UserAccount")'>Posts</a>*@
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="navbar-menu">
+        <div class="navbar-start"></div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            </div>
+            <div class="navbar-item">
+                @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </div>
+        </div>
+    </div>
+}

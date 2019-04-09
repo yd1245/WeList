@@ -1,0 +1,133 @@
+﻿@model WeList.Models.ModifyPostViewModel
+@{
+
+    ViewBag.Title = "PostEdit";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+
+<section class="section">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="tile is-ancestor">
+            <div class=" tile is-parent is-10 is-vertical">
+
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    @Html.ValidationSummary(false, "", new { @class = "notification is-danger" })
+                }
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Post Id</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input is-static" type="text" name="PostId" value="@Model.PostId" readonly>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Posted By</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input is-static" type="text" name="Email" value="@Model.Email" readonly>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Expiration</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input is-static" type="text" name="Expiration" value="@Model.Expiration" readonly>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Location</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            @Html.DropDownListFor(model => Model.LocationName, ViewData["location"] as IEnumerable<SelectListItem>,
+                                          new { htmlAttributes = new { @class = "dropdown button is-primary button" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Type</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            @Html.DropDownListFor(model => Model.TypeName, ViewData["type"] as IEnumerable<SelectListItem>,
+                                          new { htmlAttributes = new { @class = "dropdown button is-primary button" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Title</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <p class="control">
+                                <input class="input is-focused" type="text" name="Title" value="@Model.Title" placeholder="Focused input">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Body</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <textarea class="textarea is-large" type="text" name="Body" value="@Model.Body" placeholder="Large textarea">@Model.Body</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="field is-horizontal">
+                    <div class="field-label"></div>
+                    <div class="field-body">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <input type="submit" class="button is-info" value="Edit" />
+                            </p>
+                            <p class="control">
+                                <a class="button" href='@Url.Action("PostDetails", "User",new { id =Model.PostId})'>
+                                    Cancel
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    }
+</section>

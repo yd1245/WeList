@@ -1,0 +1,45 @@
+﻿@model WeList.Models.ModifyLocaleViewModel
+@{
+    ViewBag.Title = "LocaleEdit";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+
+    
+}
+<section class="section">
+    <h2 class="title">Edit Locale</h2>
+    <h3 class="subtitle">@Html.DisplayFor(m => Model.Name)</h3>
+
+    <div class="block">
+        <div class="field">
+            <label class="label"> Locale Area</label>
+            @Html.DisplayFor(m => Model.SelectArea)
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        
+        @Html.HiddenFor(m => Model.SelectArea);
+        @Html.HiddenFor(m => Model.LocaleId);
+        if (TempData["error"] != null)
+        {
+            <div class="notification is-danger">@TempData["error"]</div>
+        }
+        @Html.AntiForgeryToken()
+        <div> @Html.ValidationSummary(true, ViewData["error"] as string, new { @class = "text-danger" }) </div>
+        <div class="block">
+            <div class="field">
+                <label class="label"> Locale Name</label>
+                @Html.EditorFor(m => Model.Name, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Name)
+            </div>
+            <div class="field">
+                <label class="label"> Locale Slug</label>
+                @Html.EditorFor(m => Model.Slug, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+                @Html.ValidationMessageFor(m => Model.Slug)
+            </div>
+
+
+            <div><input type="submit" class="button" value="Edit" /> <a href="@Url.Action("AdminArea")" class="button text-center">Canceal</a></div>
+        </div>
+    }
+</section>

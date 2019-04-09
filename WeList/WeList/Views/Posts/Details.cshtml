@@ -1,0 +1,45 @@
+﻿@model WeList.Models.ShowPostViewModel
+@{
+    ViewBag.Title = "PostPage";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+
+
+<section class="section">
+
+    <div class="tile is-ancestor">
+        <div class=" tile is-parent is-10 is-vertical">
+            @if (TempData["ResponseSuccess"] != null)
+            {
+                <div class="tile is-child notification is-success">
+                    @TempData["ResponseSuccess"]           
+                </div>
+            }
+            <div class="tile is-child">
+                <div class="title">@Html.DisplayFor(m => m.Title)</div>
+            </div>
+            <div class="tile is-child">
+                <div class="has-text-grey-light">Poster: @Model.Email</div>
+                <div class="has-text-grey-light">Posted time: @Model.Timestamp</div>
+            </div>
+            <div class="tile is-child">
+                <span class="tag is-primary is-medium">@Model.AreaName</span> <span class="tag is-info is-medium">@Model.LocaleName</span>
+                <span class="tag is-success is-medium">@Model.CategoryName</span> <span class="tag is-warning is-medium">@Model.SubcategoryName</span>
+            </div>
+            <div class="tile is-child">
+                <div class="block">@Model.Body</div>
+            </div>
+            <div class="tile is-child">
+                <div class="field is-grouped">
+                    <p class="control">
+                        <a class="button is-link" href="@Url.Action("PostResponse","Posts",new { id = Model.PostId,returnUrl=Model.ReturnUrl })">
+                            Response
+                        </a>
+                    </p>
+                    <p><a href="@Model.ReturnUrl" class="button">Go Back</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,36 @@
+﻿@model WeList.Models.ModifyCategoryViewModel
+@{
+    ViewBag.Title = "CategoryEdit";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+<h2 class="title">Edit Category</h2>
+<h3 class="subtitle">@Model.Name</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => Model.CategoryId)
+    <div> @Html.ValidationSummary(true, ViewData["error"] as string, new { @class = "text-danger" }) </div>
+    <div class="block">
+        @if (TempData["error"] != null)
+        {
+        <div class="notification is-danger">@TempData["error"]</div>
+        }
+
+        <div class="field">
+            <label class="label"> Area Name</label>
+            @Html.EditorFor(m => Model.Name, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+            @Html.ValidationMessageFor(m => Model.Name)
+        </div>
+        <div class="field">
+            <label class="label"> Area Slug</label>
+            @Html.EditorFor(m => Model.Slug, new { htmlAttributes = new { @class = "input is-primary is-halfwidth" } })
+            @Html.ValidationMessageFor(m => Model.Slug)
+        </div>
+        <div><input type="submit" class="button" value="Edit" /> <a href="@Url.Action("AdminCategory")" class="button text-center">Cancel</a></div>
+
+    </div>
+}
+
+    </section>

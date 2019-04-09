@@ -1,0 +1,31 @@
+﻿@model WeList.Models.Subcategory
+@{
+    ViewBag.Title = "SubcategoryDelete";
+    Layout = "~/Views/Shared/_bulmatemplate.cshtml";
+}
+<section class="section">
+<h2 class="title">Delete Subcategory</h2>
+<h3 class="subtitle">@Model.Name</h3>
+
+<div class="is-danger">@ViewData["error"]</div>
+<article class="message is-danger">
+    <div class="message-header"><p>Are you sure you want to delete @Html.DisplayFor(m => m.Name) ? </p></div>
+    <div class="message-body">
+        Once you choose to delete the subcategory, all the posts belong to this subcategory
+        would be deleted at the same time.
+    </div>
+</article>
+<div class="block">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="button is-danger text-center" />
+            <a herf="@Url.Action("AdminCategory")" class="button is-danger glyphicon-align-center">Cancel</a>
+        </div>
+    }
+</div>
+
+    </section>
+
